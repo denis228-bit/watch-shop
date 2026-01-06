@@ -58,9 +58,49 @@
   </footer>
 </body>
 </html>
-<script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="timeluxrus_bot" data-size="large" data-onauth="onTelegramAuth(user)" data-request-access="write"></script>
-<script type="text/javascript">
-  function onTelegramAuth(user) {
-    alert('Logged in as ' + user.first_name + ' ' + user.last_name + ' (' + user.id + (user.username ? ', @' + user.username : '') + ')');
-  }
+</script>
+<div class="filters">
+  <h3>Категории:</h3>
+  <button onclick="filterCategory('classic')">Классика</button>
+  <button onclick="filterCategory('sport')">Спорт</button>
+  <button onclick="filterCategory('lux')">Люкс</button>
+
+  <h3>Подкатегории:</h3>
+  <button onclick="filterSubCategory('men')">Мужские</button>
+  <button onclick="filterSubCategory('women')">Женские</button>
+  <button onclick="filterSubCategory('unisex')">Унисекс</button>
+
+  <button onclick="showAll()">Показать все</button>
+</div>
+<div class="card" data-category="classic" data-subcategory="men">
+  <img src="https://t.me/s/watchesstorerus/1?embed=1" alt="Часы 1"/>
+  <h3>Classic Men</h3>
+  <p class="price">18 500 ₽</p>
+  <button onclick="addToCart('Classic Men',18500)">Добавить в корзину</button>
+  <br>
+  <a href="https://t.me/watchesstorerus" target="_blank">
+    <button>Заказать в Telegram</button>
+  </a>
+</div>
+<script>
+function filterCategory(cat){
+  const cards = document.querySelectorAll('.card');
+  cards.forEach(card=>{
+    card.style.display = (card.dataset.category === cat) ? 'block' : 'none';
+  });
+}
+
+function filterSubCategory(sub){
+  const cards = document.querySelectorAll('.card');
+  cards.forEach(card=>{
+    card.style.display = (card.dataset.subcategory === sub) ? 'block' : 'none';
+  });
+}
+
+function showAll(){
+  const cards = document.querySelectorAll('.card');
+  cards.forEach(card=>{
+    card.style.display = 'block';
+  });
+}
 </script>
