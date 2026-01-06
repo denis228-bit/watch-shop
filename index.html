@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>Watches Store</title>
+<title>Watch Store</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -82,8 +82,6 @@ button{
   font-size:16px;
   cursor:pointer;
 }
-button + button{margin-top:8px}
-
 .cart{
   position:fixed;
   bottom:20px;
@@ -116,7 +114,7 @@ footer{
 <div id="preloader"><div class="loader"></div></div>
 
 <header>
-  <h2>Watches Store</h2>
+  <h2>Watch Store</h2>
 </header>
 
 <section class="hero">
@@ -127,22 +125,16 @@ footer{
 <div class="container">
   <div class="products">
 
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30">
-      <h3>Tissot Watch</h3>
+    <div class="card" data-name="Tissot" data-price="18500" onclick="orderTelegram(this)">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Tissot_watch.jpg/320px-Tissot_watch.jpg" alt="Tissot">
+      <h3>Tissot</h3>
       <p class="price">18 500 ₽</p>
-      <button onclick="addToCart(18500)">В корзину</button>
-      <a href="https://t.me/watchesstorerus" target="_blank"><button>Заказать в Telegram</button></a>
     </div>
 
-    <div class="card">
-      <video controls>
-        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-      </video>
-      <h3>Hublot Watch</h3>
+    <div class="card" data-name="Hublot" data-price="22000" onclick="orderTelegram(this)">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Hublot_watch.jpg/320px-Hublot_watch.jpg" alt="Hublot">
+      <h3>Hublot</h3>
       <p class="price">22 000 ₽</p>
-      <button onclick="addToCart(22000)">В корзину</button>
-      <a href="https://t.me/watchesstorerus" target="_blank"><button>Заказать в Telegram</button></a>
     </div>
 
   </div>
@@ -164,6 +156,13 @@ function addToCart(price){
 window.onload=()=>{
   setTimeout(()=>document.getElementById('preloader').style.display='none',800);
 };
+
+function orderTelegram(card) {
+  const name = card.dataset.name;
+  const price = card.dataset.price;
+  const message = encodeURIComponent("Здравствуйте!\nХочу заказать часы:\nМодель: " + name + "\nЦена: " + price + " ₽");
+  window.open("https://t.me/watchesstorerus?text=" + message,"_blank");
+}
 </script>
 
 </body>
