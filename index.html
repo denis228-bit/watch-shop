@@ -6,182 +6,165 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background:
-    linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)),
-    url("https://images.unsplash.com/photo-1518544801976-3e159e50e5bb");
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  color: #111;
-header {
-  background: #111;
-  color: #fff;
-  padding: 20px;
-  text-align: center;
+/* ===== PRELOADER ===== */
+#preloader{
+  position:fixed;
+  inset:0;
+  background:#111;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
 }
-nav a {
-  color: #fff;
-  margin: 0 15px;
-  text-decoration: none;
+.loader{
+  width:60px;
+  height:60px;
+  border:4px solid rgba(255,255,255,.3);
+  border-top:4px solid #fff;
+  border-radius:50%;
+  animation:spin 1s linear infinite;
 }
-.hero {
-  background: url("https://images.unsplash.com/photo-1523275335684-37898b6baf30") center/cover;
-  height: 300px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 32px;
-  font-weight: bold;
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ===== GLOBAL ===== */
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial;
+  background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
+  url("https://images.unsplash.com/photo-1518544801976-3e159e50e5bb");
+  background-size:cover;
+  background-attachment:fixed;
+  color:#fff;
 }
-.filters {
-  padding: 20px;
-  background: #fff;
+
+header{
+  padding:20px;
+  text-align:center;
+  background:rgba(0,0,0,.6);
+  backdrop-filter:blur(6px);
 }
-.filters button {
-  margin: 5px;
-  padding: 8px 15px;
-  border: none;
-  background: #111;
-  color: white;
-  cursor: pointer;
-  border-radius: 5px;
+
+.hero{
+  padding:80px 20px;
+  text-align:center;
 }
-.container {
-  padding: 20px;
+.hero h1{font-size:36px;margin-bottom:10px}
+.hero p{opacity:.9}
+
+.container{padding:20px}
+
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:20px;
 }
-.products {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
-  gap: 20px;
+
+.card{
+  background:rgba(255,255,255,.95);
+  color:#111;
+  border-radius:16px;
+  padding:15px;
+  box-shadow:0 10px 25px rgba(0,0,0,.3);
 }
-.card {
-  background: white;
-  border-radius: 10px;
-  padding: 15px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+.card img,.card video{
+  width:100%;
+  border-radius:12px;
 }
-.card img, .card video {
-  width: 100%;
-  border-radius: 10px;
+.price{font-weight:bold;margin:10px 0}
+
+button{
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:10px;
+  background:#111;
+  color:#fff;
+  font-size:16px;
+  cursor:pointer;
 }
-.price {
-  font-weight: bold;
-  margin: 10px 0;
+button + button{margin-top:8px}
+
+.cart{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#fff;
+  color:#111;
+  padding:15px;
+  border-radius:14px;
+  box-shadow:0 8px 20px rgba(0,0,0,.4);
+  font-size:14px;
 }
-button.buy {
-  width: 100%;
-  background: #000;
-  color: white;
-  padding: 10px;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
+
+footer{
+  margin-top:40px;
+  padding:30px;
+  text-align:center;
+  background:rgba(0,0,0,.7);
 }
-button.buy:hover {
-  background: #333;
-}
-.cart {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background: white;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
-}
-footer {
-  background: #111;
-  color: white;
-  padding: 30px;
-  margin-top: 40px;
+
+/* ===== iPhone / Mobile ===== */
+@media(max-width:600px){
+  .hero h1{font-size:26px}
+  .cart{right:10px;left:10px;bottom:10px}
 }
 </style>
 </head>
 
 <body>
 
+<div id="preloader"><div class="loader"></div></div>
+
 <header>
-  <h1>Watch Store</h1>
-  <nav>
-    <a href="#catalog">Каталог</a>
-    <a href="https://t.me/watchesstorerus" target="_blank">Telegram</a>
-  </nav>
+  <h2>Watch Store</h2>
 </header>
 
-<div class="hero">
-  Премиальные часы
-</div>
+<section class="hero">
+  <h1>Премиальные часы</h1>
+  <p>Стиль • Качество • Надёжность</p>
+</section>
 
-<div class="filters">
-  <h3>Категории</h3>
-  <button onclick="filterCategory('classic')">Классика</button>
-  <button onclick="filterCategory('sport')">Спорт</button>
-  <button onclick="filterCategory('lux')">Люкс</button>
-
-  <h3>Подкатегории</h3>
-  <button onclick="filterSub('men')">Мужские</button>
-  <button onclick="filterSub('women')">Женские</button>
-  <button onclick="showAll()">Показать все</button>
-</div>
-
-<div class="container" id="catalog">
+<div class="container">
   <div class="products">
 
-    <div class="card" data-category="classic" data-sub="men">
-      <img src="https://images.unsplash.com/photo-1518544801976-3e159e50e5bb">
-      <h3>Classic Men</h3>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30">
+      <h3>Classic Watch</h3>
       <p class="price">18 500 ₽</p>
-      <button class="buy" onclick="addToCart('Classic Men',18500)">В корзину</button>
-      <a href="https://t.me/watchesstorerus" target="_blank">
-        <button class="buy">Заказать в Telegram</button>
-      </a>
+      <button onclick="addToCart(18500)">В корзину</button>
+      <a href="https://t.me/watchesstorerus" target="_blank"><button>Заказать в Telegram</button></a>
     </div>
 
-    <div class="card" data-category="sport" data-sub="men">
+    <div class="card">
       <video controls>
         <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
       </video>
       <h3>Sport Watch</h3>
       <p class="price">22 000 ₽</p>
-      <button class="buy" onclick="addToCart('Sport Watch',22000)">В корзину</button>
-      <a href="https://t.me/watchesstorerus" target="_blank">
-        <button class="buy">Заказать в Telegram</button>
-      </a>
-    </div>
-
-    <div class="card" data-category="lux" data-sub="women">
-      <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93">
-      <h3>Luxury Women</h3>
-      <p class="price">35 000 ₽</p>
-      <button class="buy" onclick="addToCart('Luxury Women',35000)">В корзину</button>
-      <a href="https://t.me/watchesstorerus" target="_blank">
-        <button class="buy">Заказать в Telegram</button>
-      </a>
+      <button onclick="addToCart(22000)">В корзину</button>
+      <a href="https://t.me/watchesstorerus" target="_blank"><button>Заказать в Telegram</button></a>
     </div>
 
   </div>
 </div>
 
-<div class="cart" id="cart">
-  🛒 Корзина<br>
-  Товаров: 0<br>
-  Сумма: 0 ₽
-</div>
+<div class="cart" id="cart">🛒 0 товаров<br>0 ₽</div>
 
 <footer>
-  <h3>Наш Telegram</h3>
-  <a href="https://t.me/watchesstorerus" target="_blank" style="color:white;">
-    @watchesstorerus
-  </a>
+  <p>Наш Telegram</p>
+  <a href="https://t.me/watchesstorerus" target="_blank" style="color:white">@watchesstorerus</a>
 </footer>
 
 <script>
-let cart = [];
-function addToCart(name, price) {
-  cart.push(price);
-  let sum = cart.reduce((a,b)=>a+b,0);
-  document.getElementById("cart").
+let total=0,count=0;
+function addToCart(price){
+  total+=price;count++;
+  document.getElementById('cart').innerHTML=`🛒 ${count} товаров<br>${total} ₽`;
+}
+window.onload=()=>{
+  setTimeout(()=>document.getElementById('preloader').style.display='none',800);
+};
+</script>
+
+</body>
+</html>
