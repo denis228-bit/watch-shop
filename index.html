@@ -1,106 +1,182 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Магазин часов</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 0; background:#f5f5f5; }
-    header { background:#111; color:#fff; padding:20px; text-align:center; }
-    nav a { color:#fff; margin:0 15px; text-decoration:none; }
-    .container { padding:40px; }
-    .products { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px; }
-    .card { background:#fff; border-radius:10px; padding:20px; box-shadow:0 4px 10px rgba(0,0,0,.1); }
-    .card img { width:100%; border-radius:10px; }
-    .card h3 { margin:10px 0; }
-    .price { font-size:18px; font-weight:bold; }
-    button { background:#111; color:#fff; border:none; padding:10px 15px; border-radius:5px; cursor:pointer; }
-    button:hover { background:#333; }
-    footer { background:#111; color:#fff; text-align:center; padding:20px; margin-top:40px; }
-  </style>
+<meta charset="UTF-8">
+<title>Watch Store</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+}
+header {
+  background: #111;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+nav a {
+  color: #fff;
+  margin: 0 15px;
+  text-decoration: none;
+}
+.hero {
+  background: url("https://images.unsplash.com/photo-1523275335684-37898b6baf30") center/cover;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 32px;
+  font-weight: bold;
+}
+.filters {
+  padding: 20px;
+  background: #fff;
+}
+.filters button {
+  margin: 5px;
+  padding: 8px 15px;
+  border: none;
+  background: #111;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.container {
+  padding: 20px;
+}
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+  gap: 20px;
+}
+.card {
+  background: white;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.card img, .card video {
+  width: 100%;
+  border-radius: 10px;
+}
+.price {
+  font-weight: bold;
+  margin: 10px 0;
+}
+button.buy {
+  width: 100%;
+  background: #000;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+button.buy:hover {
+  background: #333;
+}
+.cart {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+footer {
+  background: #111;
+  color: white;
+  padding: 30px;
+  margin-top: 40px;
+}
+</style>
 </head>
+
 <body>
-  <header>
-    <h1>TimeLux</h1>
-    <nav>
-      <a href="#">Главная</a>
-      <a href="#">Каталог</a>
-      <a href="#">Контакты</a>
-    </nav>
-  </header>
 
-  <div class="container">
-    <h2>Наши часы</h2>
-    <div class="products">
-      <div class="card">
-        <img src="https://via.placeholder.com/300x200" alt="Часы Classic" />
-        <h3>Tissot Watch</h3>
-        <p class="price">12 000 ₽</p>
-        <button>Купить</button>
-      </div>
-      <div class="card">
-        <img src="https://via.placeholder.com/300x200" alt="Часы Sport" />
-        <h3>Hublot Watch</h3>
-        <p class="price">15 500 ₽</p>
-        <button>Купить</button>
-      </div>
-      <div class="card">
-        <img src="https://via.placeholder.com/300x200" alt="Часы Luxury" />
-        <h3>Casio Watch</h3>
-        <p class="price">32 000 ₽</p>
-        <button>Купить</button>
-      </div>
-    </div>
-  </div>
+<header>
+  <h1>Watch Store</h1>
+  <nav>
+    <a href="#catalog">Каталог</a>
+    <a href="https://t.me/watchesstorerus" target="_blank">Telegram</a>
+  </nav>
+</header>
 
-  <footer>
-    <p>© 2026 TimeLux. Все права защищены.</p>
-  </footer>
-</body>
-</html>
-</script>
+<div class="hero">
+  Премиальные часы
+</div>
+
 <div class="filters">
-  <h3>Категории:</h3>
+  <h3>Категории</h3>
   <button onclick="filterCategory('classic')">Классика</button>
   <button onclick="filterCategory('sport')">Спорт</button>
   <button onclick="filterCategory('lux')">Люкс</button>
 
-  <h3>Подкатегории:</h3>
-  <button onclick="filterSubCategory('men')">Мужские</button>
-  <button onclick="filterSubCategory('women')">Женские</button>
-  <button onclick="filterSubCategory('unisex')">Унисекс</button>
-
+  <h3>Подкатегории</h3>
+  <button onclick="filterSub('men')">Мужские</button>
+  <button onclick="filterSub('women')">Женские</button>
   <button onclick="showAll()">Показать все</button>
 </div>
-<div class="card" data-category="classic" data-subcategory="men">
-  <img src="https://t.me/s/watchesstorerus/1?embed=1" alt="Часы 1"/>
-  <h3>Classic Men</h3>
-  <p class="price">18 500 ₽</p>
-  <button onclick="addToCart('Classic Men',18500)">Добавить в корзину</button>
-  <br>
-  <a href="https://t.me/watchesstorerus" target="_blank">
-    <button>Заказать в Telegram</button>
-  </a>
+
+<div class="container" id="catalog">
+  <div class="products">
+
+    <div class="card" data-category="classic" data-sub="men">
+      <img src="https://images.unsplash.com/photo-1518544801976-3e159e50e5bb">
+      <h3>Classic Men</h3>
+      <p class="price">18 500 ₽</p>
+      <button class="buy" onclick="addToCart('Classic Men',18500)">В корзину</button>
+      <a href="https://t.me/watchesstorerus" target="_blank">
+        <button class="buy">Заказать в Telegram</button>
+      </a>
+    </div>
+
+    <div class="card" data-category="sport" data-sub="men">
+      <video controls>
+        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+      </video>
+      <h3>Sport Watch</h3>
+      <p class="price">22 000 ₽</p>
+      <button class="buy" onclick="addToCart('Sport Watch',22000)">В корзину</button>
+      <a href="https://t.me/watchesstorerus" target="_blank">
+        <button class="buy">Заказать в Telegram</button>
+      </a>
+    </div>
+
+    <div class="card" data-category="lux" data-sub="women">
+      <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93">
+      <h3>Luxury Women</h3>
+      <p class="price">35 000 ₽</p>
+      <button class="buy" onclick="addToCart('Luxury Women',35000)">В корзину</button>
+      <a href="https://t.me/watchesstorerus" target="_blank">
+        <button class="buy">Заказать в Telegram</button>
+      </a>
+    </div>
+
+  </div>
 </div>
+
+<div class="cart" id="cart">
+  🛒 Корзина<br>
+  Товаров: 0<br>
+  Сумма: 0 ₽
+</div>
+
+<footer>
+  <h3>Наш Telegram</h3>
+  <a href="https://t.me/watchesstorerus" target="_blank" style="color:white;">
+    @watchesstorerus
+  </a>
+</footer>
+
 <script>
-function filterCategory(cat){
-  const cards = document.querySelectorAll('.card');
-  cards.forEach(card=>{
-    card.style.display = (card.dataset.category === cat) ? 'block' : 'none';
-  });
-}
-
-function filterSubCategory(sub){
-  const cards = document.querySelectorAll('.card');
-  cards.forEach(card=>{
-    card.style.display = (card.dataset.subcategory === sub) ? 'block' : 'none';
-  });
-}
-
-function showAll(){
-  const cards = document.querySelectorAll('.card');
-  cards.forEach(card=>{
-    card.style.display = 'block';
-  });
-}
-</script>
+let cart = [];
+function addToCart(name, price) {
+  cart.push(price);
+  let sum = cart.reduce((a,b)=>a+b,0);
+  document.getElementById("cart").
